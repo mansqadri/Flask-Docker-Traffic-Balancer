@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  flask-app1:
+    build:
+      context: ./flask_app
+    ports:
+      - "5001:5000"
+    environment:
+      - APP_NAME=Flask App 1
+      - REDIS_HOST=redis
+    command: ["--message", "Flask App 1"]
+
+  flask-app2:
+    build:
+      context: ./flask_app
+    ports:
+      - "5002:5000"
+    environment:
+      - APP_NAME=Flask App 2
+      - REDIS_HOST=redis
+    command: ["--message", "Flask App 2"]
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379" #
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80" # Expose Nginx on port 80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - flask-app1
+      - flask-app2
