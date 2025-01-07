@@ -30,10 +30,5 @@ def hello():
     """
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('--message', default='Hello, World!', help='Custom message for the Flask app')
-    # args = parser.parse_args()
-    # os.environ['APP_NAME'] = args.name
 
-    # custom_message = args.message  
     app.run(host='0.0.0.0')  
